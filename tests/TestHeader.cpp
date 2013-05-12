@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "../include/MP3Header.h"
 namespace {
 
 // The fixture for testing class Foo.
@@ -32,8 +33,18 @@ class TestHeader : public ::testing::Test {
 };
 
 // Tests that the Foo::Bar() method does Abc.
-TEST_F(TestHeader, MethodBarDoesAbc) {
-  EXPECT_EQ(1,1);
+TEST_F(TestHeader, TestSyncWord) {
+    int header = 0xFFFBA040;
+    unsigned char * data = new unsigned char[4];
+    data[0] = 0xFF;
+    data[1] = 0xFB;
+    data[2] = 0xA0;
+    data[3] = 0x40;
+    MP3Header * mph = new MP3Header();
+
+    bool expected = mph->syncWord(data);
+    delete [] data;
+    ASSERT_TRUE(expected);
 }
 
 // Tests that Foo does Xyz.

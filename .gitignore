@@ -3,3 +3,4 @@ build
 Codec
 CodecTest
 build_test
+libCodec.a

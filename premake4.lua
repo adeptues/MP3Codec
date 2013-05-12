@@ -1,5 +1,5 @@
 solution "Codec"
-  configurations {"Debug","Release"}
+  configurations {"Debug","Release","Debuglib"}
   platforms {"Native","Universal"}
   location "build"
   
@@ -19,6 +19,14 @@ project "Codec"
       configuration "Release"
          defines { "NDEBUG" }
          flags { "Optimize" }
+	 
+      configuration "Debuglib"
+	 defines {"DEBUG"}
+	 flags {"Symbols"}
+	 kind "StaticLib"
+	 targetdir "libs"
+
+
 
 project "CodecTest"--need seperate source dir for test project
   location "build_test"
@@ -27,7 +35,7 @@ project "CodecTest"--need seperate source dir for test project
   includedirs{"./include/**.h","./lib-include"}
   buildoptions("-pthread")
   libdirs{"libs"}
-  links{"gtest","pthread"}
+  links{"gtest","pthread","Codec"}
   files{"tests/**.cpp","tests/**.h"}
   
        configuration "Debug"
@@ -37,3 +45,7 @@ project "CodecTest"--need seperate source dir for test project
       configuration "Release"
          defines { "NDEBUG" }
          flags { "Optimize" }
+	 
+    configuration "Debuglib"
+	 defines {"DEBUG"}
+	 flags {"Symbols"}

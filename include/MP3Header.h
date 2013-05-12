@@ -6,10 +6,11 @@
 using namespace std;
 class MP3Header
 {
+
     public:
         MP3Header();
-        MP3Header(char * data);
-        bool syncWord(char * data);
+        MP3Header(unsigned char * data);
+        bool syncWord(unsigned char * data);
         virtual ~MP3Header();
     protected:
     private:
@@ -25,7 +26,7 @@ class MP3Header
         string mx1;
         string mx2;
         string emphasis;
-        char * data;
+        unsigned char * data;
         void parseHeader();
 
 };
